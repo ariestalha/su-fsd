@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
+import { getData } from "./api/files";
 
 export default function Home(props) {
   const { list = [] } = props;
@@ -61,12 +62,12 @@ export default function Home(props) {
 
 export async function getServerSideProps() {
   // fetch data from an API
-  const res = await fetch("http://localhost:3000/api/files");
-  const filesList = await res.json();
+
+  const jsonData = await getData();
 
   return {
     props: {
-      list: filesList,
+      list: jsonData,
     },
   };
 }
